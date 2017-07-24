@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>Memory Game</title>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/game.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row text-center margin-20">
+            <span onClick="startGame() " class="pointer text-center" style="font-size:20px;
+    ">Refresh: <i class="fa fa-refresh"></i></span>
+        </div>
+
+        <div class="row text-center text-primary margin-20">
+            <span id="status"></span>
+        </div>
+
+
+        <div class="row margin-20" id="cards">
+
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+<script src="https://use.fontawesome.com/ce7654fa3e.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/data.js"></script>
+<script type="text/javascript" src="/js/game.js"></script>
+
+</html>
