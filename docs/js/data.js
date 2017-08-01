@@ -1,31 +1,56 @@
+var firstCard = null;
+var secondCard = null;
+var numberOfMoves = 0;
+var completedIds = [];
+
+/**
+ * Function to create card object
+ * @param {*} id Id of the card
+ * @param {*} front front content
+ * @param {*} back back content
+ */
 function card(id, front, back) {
     this.id = id;
     this.front = front;
     this.back = back;
 }
-var firstCard = null;
-var secondCard = null;
-var numberOfMoves = 0;
 
+/**
+ * Helper method to get the card id from DOM id
+ * @param {*} currentId Dom Id
+ */
 function getCardId(currentId) {
     var splits = currentId.split("_");
     var id = splits[splits.length - 1];
     return id;
 }
 
+/**
+ * Helper method to flip the card
+ * @param {*} id Card id
+ * @param {*} isFront Flag to check if to flip front or back
+ */
 function flip(id, isFront) {
     if (isFront) {
         $('#' + 'front_inner_' + id).removeClass('hide');
         $('#' + 'back_inner_' + id).addClass('hide');
     } else {
-        $('#' + 'front_inner_' + id).delay(0).addClass('hide');
-        $('#' + 'back_inner_' + id).delay(0).removeClass('hide');
+        $('#' + 'front_inner_' + id).addClass('hide');
+        $('#' + 'back_inner_' + id).removeClass('hide');
     }
 }
 
+/**
+ * Method to update the game play status
+ * @param {*} message Message to be shown
+ */
 function notify(message) {
     $('#status').text(message);
 }
+
+/**
+ * Resets for a new game play
+ */
 
 function refresh() {
     firstCard = null;
@@ -34,14 +59,27 @@ function refresh() {
     numberOfMoves = 0;
     showMovesAndRating();
 }
-var completedIds = [];
 
+/**
+ * Helpers method to reset cards
+ */
+function reset() {
+    firstCard = null;
+    secondCard = null;
+}
+
+/**
+ * Resets the cards
+ */
 function resetState() {
     flip(firstCard, true);
     flip(secondCard, true);
     reset();
 }
 
+/**
+ * Helper method to update the moves and rating
+ */
 function showMovesAndRating() {
     $('.numberOfMoves').text(numberOfMoves);
     var stars = 0;
@@ -65,11 +103,10 @@ function showMovesAndRating() {
     $('.rating').html(starsDisplay.join(' '));
 }
 
-function reset() {
-    firstCard = null;
-    secondCard = null;
-}
-
+/**
+ * Validates a move by the player
+ * @param {*} obj Card dom object
+ */
 function validate(obj) {
     var id = $(obj).attr("id");
     notify("");
@@ -114,6 +151,12 @@ function validate(obj) {
     }
 }
 
+/**
+ * This method generates a card object with helper methods for display and flip
+ * @param {*} id  Id for the card
+ * @param {*} type Type (front/back)
+ * @param {*} back Content for back side
+ */
 function displayCard(id, type, back) {
     this.id = id;
     this.front = "fa-question";
@@ -150,7 +193,9 @@ function displayCard(id, type, back) {
     }
 }
 
-
+/**
+ * List of cards
+ */
 function cards() {
     var cardsArray = [];
     cardsArray.push(new card(1, "fa-bicycle", {
@@ -189,6 +234,9 @@ function cards() {
 
 }
 
+/**
+ * Helper method to shuffle the cards
+ */
 function makeDisplayCard() {
     var currentCards = cards();
     var displayCards = [];

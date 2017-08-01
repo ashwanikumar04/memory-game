@@ -1,6 +1,8 @@
 ///Code inspired from http://knowpapa.com/js-stopwatch/
 
-
+/**
+ * Helper class to create a StopWatch
+ */
 function StopWatch() {
     var self = this;
     this.state = false;

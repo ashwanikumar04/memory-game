@@ -1,8 +1,12 @@
+var currentTimer;
+
 $(document).ready(function () {
 
 });
-var currentTimer;
 
+/**
+ * This method starts resets the game state and starts the games
+ */
 function startGame() {
     $('#splash').addClass('hide');
     $('#game').removeClass('hide');

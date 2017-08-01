@@ -1,11 +1,19 @@
 var isDebug = true;
 
+/**
+ * Helper method to enable logging
+ * @param {*} data Data to log
+ */
 function log(data) {
     if (isDebug) {
         console.log(data);
     }
 }
 
+/**
+ * Helper method to covert a number to MM:SS:TT format
+ * @param {*} time 
+ */
 function formatDate(time) {
     var decisec = Math.floor(time / 100) + '';
     var second = Math.floor(time / 1000);
