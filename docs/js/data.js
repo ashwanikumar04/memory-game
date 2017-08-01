@@ -43,7 +43,7 @@ function resetState() {
 }
 
 function showMovesAndRating() {
-    $('#numberOfMoves').text(numberOfMoves);
+    $('.numberOfMoves').text(numberOfMoves);
     var stars = 0;
     var textColor = "#00ff00";
     if (numberOfMoves <= 10) {
@@ -62,7 +62,7 @@ function showMovesAndRating() {
     for (var index = stars; index < 3; index++) {
         starsDisplay.push('<span class="pointer text-center"><i class="fa fa-star"></i></span>')
     }
-    $('#rating').html(starsDisplay.join(' '));
+    $('.rating').html(starsDisplay.join(' '));
 }
 
 function reset() {
@@ -102,6 +102,14 @@ function validate(obj) {
         }
         if (completedIds.length === 8) {
             notify("Game completed. Start a new one.");
+            if (currentTimer) {
+                currentTimer.stop();
+            }
+            $("#gameFinish").modal({
+                escapeClose: true,
+                clickClose: true,
+                showClose: false
+            });
         }
     }
 }

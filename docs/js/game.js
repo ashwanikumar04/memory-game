@@ -13,6 +13,7 @@ function startGame() {
         card.displayHtml().appendTo("#cards");
     })
     refresh();
+    $.modal.close();
     if (currentTimer) {
         currentTimer.reset();
     }

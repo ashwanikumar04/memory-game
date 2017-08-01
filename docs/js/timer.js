@@ -37,7 +37,7 @@ function StopWatch() {
         }
         if (self.state) {
             self.time = timediff;
-            $('#' + self.placeHolder).text(formatDate(self.time));
+            $('.' + self.placeHolder).text(formatDate(self.time));
             self.refreshTimer = setTimeout(function () {
                 self.timeCounter(startTime);
             }, 10);
