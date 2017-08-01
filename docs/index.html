@@ -10,18 +10,44 @@
 
 <body>
     <div class="container">
-        <div class="row text-center margin-20">
-            <span onClick="startGame() " class="pointer text-center" style="font-size:20px;
-    ">Refresh: <i class="fa fa-refresh"></i></span>
+
+
+        <div class="row text-primary text-center" id="splash" style="font-size:100px;margin-top:100px">
+            Welcome to Memory Game
+            <div class="row text-center margin-20">
+                <span onClick="startGame() " class="pointer text-center" style="color:green;
+    "><i class="fa fa-play"></i></span><br/>
+
+            </div>
+            <div class="row text-center margin-20">
+                <span class="text-center font-size-20">Start Game</span>
+            </div>
         </div>
+        <div class="row hide margin-20" id="game">
+            <div class="row text-center">
+                <div class="row bg-primary">
+                    <div class="row col-sm-offset-2 col-sm-4 font-size-20">Time (mm:ss:tt)</div>
+                    <div class="row col-sm-4 font-size-20" id="stopWatch"></div>
+                </div>
+                <div class="row bg-primary">
+                    <div class="row col-sm-offset-2 col-sm-4 font-size-20">Number of moves</div>
+                    <div class="row col-sm-4 font-size-20" id="numberOfMoves"></div>
+                </div>
+                <div class="row bg-warning">
+                    <div class="row col-sm-offset-2 col-sm-4 font-size-20">Rating</div>
+                    <div class="row col-sm-4 font-size-20" id="rating"></div>
+                </div>
+                <div class="row bg-warning">
+                    <div class="row col-sm-offset-2 col-sm-4 font-size-20">Restart</div>
+                    <div class="row col-sm-4 font-size-20"> <span onClick="startGame() " class="pointer text-center"><i class="fa fa-refresh fa-2x"></i></span><br/></div>
+                </div>
+            </div>
+            <div class="row text-center text-primary margin-20">
+                <span id="status"></span>
+            </div>
+            <div class="row margin-20" id="cards">
 
-        <div class="row text-center text-primary margin-20">
-            <span id="status"></span>
-        </div>
-
-
-        <div class="row margin-20" id="cards">
-
+            </div>
         </div>
     </div>
 </body>
@@ -29,6 +55,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
 <script src="https://use.fontawesome.com/ce7654fa3e.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
 <script type="text/javascript" src="js/data.js"></script>
 <script type="text/javascript" src="js/game.js"></script>
 

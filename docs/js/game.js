@@ -1,8 +1,11 @@
 $(document).ready(function () {
-    startGame();
+
 });
+var currentTimer;
 
 function startGame() {
+    $('#splash').addClass('hide');
+    $('#game').removeClass('hide');
     $('#cards').empty();
     notify("");
     var displayCards = makeDisplayCard();
@@ -10,4 +13,10 @@ function startGame() {
         card.displayHtml().appendTo("#cards");
     })
     refresh();
+    if (currentTimer) {
+        currentTimer.reset();
+    }
+    currentTimer = new StopWatch()
+    currentTimer.placeHolder = "stopWatch";
+    currentTimer.start();
 }

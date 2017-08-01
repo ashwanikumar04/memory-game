@@ -5,6 +5,7 @@ function card(id, front, back) {
 }
 var firstCard = null;
 var secondCard = null;
+var numberOfMoves = 0;
 
 function getCardId(currentId) {
     var splits = currentId.split("_");
@@ -30,6 +31,8 @@ function refresh() {
     firstCard = null;
     secondCard = null;
     completedIds = [];
+    numberOfMoves = 0;
+    showMovesAndRating();
 }
 var completedIds = [];
 
@@ -37,6 +40,29 @@ function resetState() {
     flip(firstCard, true);
     flip(secondCard, true);
     reset();
+}
+
+function showMovesAndRating() {
+    $('#numberOfMoves').text(numberOfMoves);
+    var stars = 0;
+    var textColor = "#00ff00";
+    if (numberOfMoves <= 10) {
+        stars = 3;
+    } else if (numberOfMoves > 10 && numberOfMoves <= 14) {
+        stars = 2;
+        textColor = "#ffbe00"
+    } else {
+        stars = 1;
+        textColor = "#ff0000";
+    }
+    var starsDisplay = [];
+    for (var index = 1; index <= stars; index++) {
+        starsDisplay.push('<span class="pointer text-center" style="color:' + textColor + ';"><i class="fa fa-star"></i></span>')
+    }
+    for (var index = stars; index < 3; index++) {
+        starsDisplay.push('<span class="pointer text-center"><i class="fa fa-star"></i></span>')
+    }
+    $('#rating').html(starsDisplay.join(' '));
 }
 
 function reset() {
@@ -48,8 +74,6 @@ function validate(obj) {
     var id = $(obj).attr("id");
     notify("");
     if (firstCard == null) {
-        console.log(completedIds);
-        console.log(getCardId(id));
         if (_.indexOf(completedIds, getCardId(id)) === -1) {
             firstCard = id;
             flip(id, false);
@@ -57,6 +81,8 @@ function validate(obj) {
             notify("This is already discovered.");
         }
     } else {
+        numberOfMoves++;
+        showMovesAndRating();
         secondCard = id;
         if (firstCard === secondCard) {
             secondCard = null;
@@ -158,13 +184,9 @@ function cards() {
 function makeDisplayCard() {
     var currentCards = cards();
     var displayCards = [];
-    console.log(currentCards);
-
     _(currentCards).forEach(function (card) {
         displayCards.push(new displayCard(card.id, 'front', card.front));
         displayCards.push(new displayCard(card.id, 'back', card.back.text));
     })
-
-    console.log(displayCards);
     return _.shuffle(displayCards);
 }

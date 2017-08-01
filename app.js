@@ -5,7 +5,7 @@ var app = express();
 var serveStatic = require('serve-static');
 app.disable('etag');
 app.disable('x-powered-by');
-app.use(serveStatic(__dirname + '/public', {
+app.use(serveStatic(__dirname + '/docs', {
     maxAge: '5d',
     setHeaders: setCustomCacheControl
 }));
