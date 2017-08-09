@@ -4,12 +4,23 @@ $(document).ready(function () {
 
 });
 
+var events = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 /**
  * This method starts resets the game state and starts the games
  */
 function startGame() {
-    $('#splash').addClass('hide');
-    $('#game').removeClass('hide');
+    $('#splash').addClass('animated fadeOutLeft');
+    $('#splash').one(events, function () {
+        $(this).addClass('hide');
+        $('#game').removeClass('hide');
+        $('#game').addClass('animated fadeInRight');
+        restartGame();
+
+    });
+
+}
+
+function restartGame() {
     $('#cards').empty();
     notify("");
     var displayCards = makeDisplayCard();

@@ -9,7 +9,7 @@ var completedIds = [];
  * @param {*} front front content
  * @param {*} back back content
  */
-function card(id, front, back) {
+function Card(id, front, back) {
     this.id = id;
     this.front = front;
     this.back = back;
@@ -104,15 +104,38 @@ function showMovesAndRating() {
 }
 
 /**
+ * Animates the cards
+ * @param {*} animation Animation 
+ */
+function animateCards(animation) {
+    var firstCardId = firstCard;
+    var secondCardId = secondCard;
+    $('#' + firstCardId).addClass(animation);
+    $('#' + firstCardId).one(events, function () {
+        $('#' + firstCardId).removeClass(animation);
+    });
+
+    $('#' + secondCardId).addClass(animation);
+    $('#' + secondCardId).one(events, function () {
+        $('#' + secondCardId).removeClass(animation);
+    });
+}
+
+/**
  * Validates a move by the player
  * @param {*} obj Card dom object
  */
 function validate(obj) {
     var id = $(obj).attr("id");
+    log(id);
     notify("");
+    if ($(obj).hasClass('show')) {
+        return;
+    }
     if (firstCard == null) {
         if (_.indexOf(completedIds, getCardId(id)) === -1) {
             firstCard = id;
+            $('#' + firstCard).addClass('show');
             flip(id, false);
         } else {
             notify("This is already discovered.");
@@ -131,11 +154,16 @@ function validate(obj) {
         flip(secondCard, false);
         if (oldId === currentId) {
             completedIds.push(currentId);
+            $('#' + firstCard).addClass('show');
+            $('#' + secondCard).addClass('show');
+            animateCards('animated rubberBand');
             reset();
         } else {
+            animateCards('animated wobble');
+            $('#' + firstCard).removeClass('show');
             setTimeout(function () {
                 resetState();
-            }, 300);
+            }, 500);
         }
         if (completedIds.length === 8) {
             notify("Game completed. Start a new one.");
@@ -157,7 +185,7 @@ function validate(obj) {
  * @param {*} type Type (front/back)
  * @param {*} back Content for back side
  */
-function displayCard(id, type, back) {
+function DisplayCard(id, type, back) {
     this.id = id;
     this.front = "fa-question";
     this.back = back.indexOf("fa-") >= 0 ? '<i class="fa ' + back + ' fa-5x"></i>' : back;
@@ -165,9 +193,9 @@ function displayCard(id, type, back) {
     this.displayHtml = function () {
         return $('<div/>', {
             'id': 'card_' + type + "_" + currentCard.id,
-            'class': 'myClass',
+            'class': '',
             'style': 'cursor:pointer;font-weight:bold;',
-            'html': '<div class="col-sm-3">' +
+            'html': '<div class="col-sm-3 text-center">' +
                 ' <div class="card" id="' + 'inner_card_' + type + "_" + currentCard.id + '">' +
                 '<div class="front panel panel-primary well" id="' + 'front_inner_card_' + type + "_" + currentCard.id + '">' +
                 '<div class="panel-body text-center">' +
@@ -183,12 +211,8 @@ function displayCard(id, type, back) {
             'click': function () {
                 validate($(this)[0]);
             },
-            'mouseenter': function () {
-                $(this).css('color', 'red');
-            },
-            'mouseleave': function () {
-                $(this).css('color', 'black');
-            }
+            'mouseenter': function () {},
+            'mouseleave': function () {}
         });
     }
 }
@@ -198,35 +222,35 @@ function displayCard(id, type, back) {
  */
 function cards() {
     var cardsArray = [];
-    cardsArray.push(new card(1, "fa-bicycle", {
+    cardsArray.push(new Card(1, "fa-bicycle", {
         text: "Bicycle"
     }))
 
-    cardsArray.push(new card(2, "fa-bus", {
+    cardsArray.push(new Card(2, "fa-bus", {
         text: "Bus"
     }))
 
-    cardsArray.push(new card(3, "fa-car", {
+    cardsArray.push(new Card(3, "fa-car", {
         text: "Car"
     }))
 
-    cardsArray.push(new card(4, "fa-motorcycle", {
+    cardsArray.push(new Card(4, "fa-motorcycle", {
         text: "Motorcycle"
     }))
 
-    cardsArray.push(new card(5, "fa-ship", {
+    cardsArray.push(new Card(5, "fa-ship", {
         text: "Ship"
     }))
 
-    cardsArray.push(new card(6, "fa-train", {
+    cardsArray.push(new Card(6, "fa-train", {
         text: "Train"
     }))
 
-    cardsArray.push(new card(7, "fa-plane", {
+    cardsArray.push(new Card(7, "fa-plane", {
         text: "Plane"
     }))
 
-    cardsArray.push(new card(8, "fa-truck", {
+    cardsArray.push(new Card(8, "fa-truck", {
         text: "Truck"
     }))
 
@@ -241,8 +265,8 @@ function makeDisplayCard() {
     var currentCards = cards();
     var displayCards = [];
     _(currentCards).forEach(function (card) {
-        displayCards.push(new displayCard(card.id, 'front', card.front));
-        displayCards.push(new displayCard(card.id, 'back', card.back.text));
+        displayCards.push(new DisplayCard(card.id, 'front', card.front));
+        displayCards.push(new DisplayCard(card.id, 'back', card.back.text));
     })
     return _.shuffle(displayCards);
 }

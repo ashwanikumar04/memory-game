@@ -7,13 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/game.css">
     <link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 </head>
 
 <body>
     <div class="container">
-
-
-        <div class="row text-primary text-center" id="splash" style="font-size:100px;margin-top:100px">
+        <div class="row text-center" id="splash" style="font-size:100px;margin-top:100px;color:white">
             Welcome to Memory Game
             <div class="row text-center margin-20">
                 <span onClick="startGame() " class="pointer text-center" style="color:green;
@@ -21,11 +20,11 @@
 
             </div>
             <div class="row text-center margin-20">
-                <span class="text-center font-size-20">Start Game</span>
+                <span class="text-center font-size-20" style="color:white">Start Game</span>
             </div>
         </div>
         <div class="row hide margin-20" id="game">
-            <div class="row text-center">
+            <div class="row col-sm-12 text-center">
                 <div class="row bg-primary">
                     <div class="row col-sm-offset-2 col-sm-4 font-size-20">Time (mm:ss:tt)</div>
                     <div class="row col-sm-4 font-size-20 stopWatch"></div>
@@ -40,7 +39,7 @@
                 </div>
                 <div class="row bg-warning">
                     <div class="row col-sm-offset-2 col-sm-4 font-size-20">Restart</div>
-                    <div class="row col-sm-4 font-size-20"> <span onClick="startGame() " class="pointer text-center"><i class="fa fa-refresh fa-2x"></i></span></div>
+                    <div class="row col-sm-4 font-size-20"> <span onClick="restartGame() " class="pointer text-center"><i class="fa fa-refresh fa-2x"></i></span></div>
                 </div>
             </div>
             <div class="row text-center text-primary margin-20">
@@ -51,7 +50,7 @@
             </div>
             <div id="gameFinish" style="display:none;" class="row text-center">
                 <p>Congratulations, you have won the game.</p>
-                <span onClick="startGame() " class="pointer text-center " style="color:green">Restart <i class="fa fa-refresh"></i></span>
+                <span onClick="restartGame() " class="pointer text-center " style="color:green">Restart <i class="fa fa-refresh"></i></span>
 
                 <div class="row" style="padding:20px">
                     <div class="row bg-primary">
